@@ -11,7 +11,7 @@ The basic syntax for inputting an arithmetic expression is as follows:
 - **Division** operand is given by the symbol `/`
 - **Multiplication** operand is given by the symbol `*`
 - **Addition** operand is given by the symbol `+`
-- **Subtraction** operand is given by the symbol `-`
+- **Subtraction** operand is given by the symbol `~`
 
 ### Unary Operators:
 - The unary minus sign is given by `-`
