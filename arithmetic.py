@@ -183,6 +183,8 @@ def main():
         try:
             print("Enter the expression:")
             expression = input()
+            if expression == "end":
+                break
             print('Loading answers ...')
             time.sleep(2)
             print(f"Result as calculated by interpret_arithmetic_expression(): {interpret_arithmetic_expression(expression)}")
