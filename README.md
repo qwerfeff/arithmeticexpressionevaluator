@@ -22,7 +22,7 @@ The basic syntax for inputting an arithmetic expression is as follows:
 ### Numbers:
 - Numbers are represented as usual
   
-###Command statements:
+### Command statements:
 -Type `-end` to exit
 
 ## Restrictions
