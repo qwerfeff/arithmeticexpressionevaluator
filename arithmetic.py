@@ -183,7 +183,7 @@ def main():
         try:
             print("Enter the expression:")
             expression = input()
-            if expression == "end":
+            if expression == "-end":
                 break
             print('Loading answers ...')
             time.sleep(2)
