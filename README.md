@@ -21,6 +21,9 @@ The basic syntax for inputting an arithmetic expression is as follows:
 
 ### Numbers:
 - Numbers are represented as usual
+  
+##Command statements:
+-Type `-end` to exit
 
 ## Restrictions
 
@@ -28,3 +31,4 @@ The arithmetic expression evaluators will not process the input under the follow
 - Complex numbers are involved, e.g., `(-1)^(1/2)`
 - Division by zero, e.g., `(1)/(0)`
 - Incorrect syntax for an arithmetic expression, e.g., `1+/*78))((`, `oneplusone`
+  
