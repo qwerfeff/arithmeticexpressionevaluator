@@ -52,8 +52,9 @@ def evaluate_simple_arithmetic_expression(expression):
 def evaluate_arithmetic_expression(expression):
    input_expression=expression
    input_expression = input_expression.replace(" ", "")
-   input_expression = input_expression.replace("~", "+-1*")
    input_expression = input_expression.replace("--", "")
+   input_expression = input_expression.replace("~-","+")
+   input_expression = input_expression.replace("~", "+-1*")
    tokenized_expression=tokenize_expression(input_expression,"^/*+()")
    tokenized_expression=remove_all_instances(tokenized_expression,'')
    stack=Stack()
@@ -75,8 +76,9 @@ def evaluate_arithmetic_expression(expression):
    return evaluate_simple_arithmetic_expression(["0","+"]+stack.items)
 def postfix_converter(expression):
    input_expression=expression.replace(" ","")
+   input_expression = input_expression.replace("--", "")
+   input_expression = input_expression.replace("~-","+")
    input_expression=input_expression.replace("~","+-1*")
-   input_expression=input_expression.replace("--","")
    operator_stack=Stack()
    queue=Queue()
    number=""
