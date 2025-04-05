@@ -131,8 +131,9 @@ def shunting_yard_algorithm(expression):
 def interpret_simple_arithmetic_expression(expression):
    input_expression=expression
    input_expression=input_expression.replace(" ","")
-   input_expression=input_expression.replace("~","+-")
-   input_expression=input_expression.replace("--","")
+   input_expression = input_expression.replace("--", "")
+   input_expression = input_expression.replace("~-", "+")
+   input_expression = input_expression.replace("~", "+-1*")
    processed_expression=ArithmeticExpression(input_expression)
    precedence_of_operator="^/*+"
    for Operator in precedence_of_operator:
