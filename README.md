@@ -15,6 +15,7 @@ The basic syntax for inputting an arithmetic expression is as follows:
 
 ### Unary Operators:
 - The unary minus sign is given by `-`
+- The factorial is given by `!` and is preceded by the whole number of which the factorial is to be found
 
 ### Precedence Operators:
 - Open and close brace operands are given by `(` and `)` respectively
