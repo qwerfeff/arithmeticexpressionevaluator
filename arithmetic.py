@@ -122,8 +122,8 @@ def postfix_evaluator(queue):
    while not input_queue.is_empty():
        element = input_queue.dequeue()
        if element in ["^","*","/","+"]:
-           num2=stack.pop()
-           num1=stack.pop()
+           num2=str(stack.pop())
+           num1=str(stack.pop())
            if num1[-1] == "!":
                num1 = factorial(num1)
            if num2[-1] == "!":
@@ -132,7 +132,12 @@ def postfix_evaluator(queue):
            stack.push(result)
        else:
            stack.push(element)
-   return stack.pop()
+   result = str(stack.pop())
+   if result[-1] == "!":
+       result=factorial(result)
+   else:
+       result=float(result)
+   return result
 @measure_time
 def shunting_yard_algorithm(expression):
     return postfix_evaluator(postfix_converter(expression))
@@ -191,7 +196,10 @@ def interpret_arithmetic_expression(expression):
        evaluated_expression=processed_expression.string[:start]+interpret_simple_arithmetic_expression(expression_in_brackets)+processed_expression.string[end+1:]
        processed_expression=ArithmeticExpression(evaluated_expression)
    result = interpret_simple_arithmetic_expression(processed_expression.string)
-   result = float(result)
+   if result[-1] == "!":
+       result = factorial(result)
+   else:
+       result = float(result)
    return result
 def main():
     while True:
