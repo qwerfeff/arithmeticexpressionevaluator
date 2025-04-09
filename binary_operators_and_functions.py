@@ -37,6 +37,23 @@ def precedence(operator1,operator2):
        return 1
    else:
        return 2
+def factorial(input_number):
+    position = input_number.find("!")
+    if position != -1:
+        number = int(input_number[:position])
+        if not number.is_integer() or number < 0:
+            raise SyntaxError("Cannot process factorial of numbers that are not whole numbers")
+        if number == 1 or number == 0:
+            return 1
+        if number>1:
+            i=number
+            result=1
+            while i > 1:
+                result=result*i
+                i=i-1
+            return factorial(str(result)+input_number[position+1:])
+    else:
+        return input_number
 def remove_all_instances(input_list,item):
    list_to_be_returned=[]
    for i in input_list:
