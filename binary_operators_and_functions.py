@@ -1,8 +1,8 @@
 def evaluate_binary_operation(num1, num2, operator):
    if not isinstance(num1,(float,int)) or not isinstance(num2,(float,int)):
-       raise SyntaxError("Only int or float is valid for parameters ==> num1,num2")
+       raise ValueError("Only int or float is valid for parameters ==> num1,num2 in function ==> evaluate binary operation")
    if operator not in ["^","/","*","+"]:
-       raise SyntaxError("Only binary operators +,~,*,/,^ are valid for parameter ==> operator")
+       raise ValueError("Only binary operators +,~,*,/,^ are valid for parameter ==> operator in function ==> evaluate binary operation")
    if operator == "+":
        return num1+num2
    if operator == "*":
@@ -20,7 +20,7 @@ def evaluate_binary_operation(num1, num2, operator):
            raise SyntaxError("Cannot do complex number algebra")
 def precedence(operator1,operator2):
    if (operator1 or operator2) not in ["^","/","*","+","(",")"]:
-       raise SyntaxError("Only operators +,~,*,/,^,(,) are valid for parameter ==> operator1,operator2")
+       raise ValueError("Only operators +,~,*,/,^,(,) are valid for parameter ==> operator1,operator2 in function ==> precedence")
    precedence_levels = {
        '+': 1,
        '*': 2,
@@ -40,9 +40,10 @@ def precedence(operator1,operator2):
 def factorial(input_number):
     position = input_number.find("!")
     if position != -1:
-        number = int(input_number[:position])
-        if not number.is_integer() or number < 0:
-            raise SyntaxError("Cannot process factorial of numbers that are not whole numbers")
+        number = (input_number[:position])
+        if not number.isdigit() or number < 0:
+            raise SyntaxError("The factorial function is only defined for non-negative integers")
+        number = int(number)
         if number == 1 or number == 0:
             return 1
         if number>1:
@@ -55,6 +56,8 @@ def factorial(input_number):
     else:
         return input_number
 def remove_all_instances(input_list,item):
+   if not type(input_list) is list:
+       raise ValueError("Only datatype:list is valid input for parameter ==> input_list in function ==> remove_all_instances")
    list_to_be_returned=[]
    for i in input_list:
        if i != item:
