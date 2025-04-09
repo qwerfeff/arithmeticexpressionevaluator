@@ -30,7 +30,7 @@ The basic syntax for inputting an arithmetic expression is as follows:
 
 The arithmetic expression evaluators will not process the input under the following circumstances:
 - Complex numbers are involved, e.g., `(-1)^(1/2)`
-- You can’t take the factorial of negative numbers or decimals—only whole numbers (0, 1, 2, 3, etc.) work, e.g, `-1!`
+- You can’t take the factorial of negative numbers or decimals—only whole numbers (0, 1, 2, 3, etc.) work, e.g, `-1!`,`1.23!`,`-1.2!`
 - Division by zero, e.g., `(1)/(0)`
 - Incorrect syntax for an arithmetic expression, e.g., `1+/*78))((`, `oneplusone`
   
