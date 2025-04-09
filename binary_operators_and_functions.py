@@ -41,9 +41,11 @@ def factorial(input_number):
     position = input_number.find("!")
     if position != -1:
         number = (input_number[:position])
-        if not number.isdigit() or number < 0:
+        if not number.isdigit():
             raise SyntaxError("The factorial function is only defined for non-negative integers")
         number = int(number)
+        if number<0:
+            raise SyntaxError("The factorial function is only defined for non-negative integers")
         if number == 1 or number == 0:
             return 1
         if number>1:
