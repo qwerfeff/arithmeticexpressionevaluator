@@ -1,7 +1,7 @@
 import time
 from tokenizer import tokenize_expression
 from datastructures import Stack,Queue,ArithmeticExpression
-from binary_operators_and_functions import evaluate_binary_operation,precedence,remove_all_instances
+from binary_operators_and_functions import evaluate_binary_operation,precedence,remove_all_instances,factorial
 def measure_time(function):
     def wrapper(args,**kwargs):
         start=time.time()
@@ -20,6 +20,10 @@ def evaluate_simple_arithmetic_expression(expression):
                    num2 = stack.pop()
                    popped_operator = stack.pop()
                    num1 = stack.pop()
+                   if num1[-1] == "!":
+                       num1 = factorial(num1)
+                   if num2[-1] == "!":
+                       num2 = factorial(num2)
                    if popped_operator == operator:
                        stack.push(str(evaluate_binary_operation(float(num1), float(num2), popped_operator)))
                    else:
@@ -73,7 +77,7 @@ def evaluate_arithmetic_expression(expression):
            stack.push(tokenized_expression[i])
    stack.push("+")
    stack.push("0")
-   return evaluate_simple_arithmetic_expression(["0","+"]+stack.items)
+   return float(evaluate_simple_arithmetic_expression(["0","+"]+stack.items))
 def postfix_converter(expression):
    input_expression=expression.replace(" ","")
    input_expression = input_expression.replace("--", "")
@@ -100,14 +104,14 @@ def postfix_converter(expression):
                operator_stack.push(input_expression[i])
            elif precedence(operator_stack.peek(),input_expression[i]) == 2:
                operator_stack.push(input_expression[i])
-       elif input_expression[i].isdigit() or input_expression[i] == "-" or input_expression[i] == ".":
+       elif input_expression[i].isdigit() or input_expression[i] == "-" or input_expression[i] == "." or input_expression[i] == "!":
            number = number + input_expression[i]
            if i+1 < len(input_expression):
                if input_expression[i+1] in ["^","/","*","+","(",")"]:
-                   queue.enqueue(float(number))
+                   queue.enqueue(number)
                    number=""
            if i == len(input_expression)-1:
-               queue.enqueue(float(number))
+               queue.enqueue(number)
    while not operator_stack.is_empty():
        popped_operator=operator_stack.pop()
        queue.enqueue(popped_operator)
@@ -120,7 +124,11 @@ def postfix_evaluator(queue):
        if element in ["^","*","/","+"]:
            num2=stack.pop()
            num1=stack.pop()
-           result=evaluate_binary_operation(num1,num2,element)
+           if num1[-1] == "!":
+               num1 = factorial(num1)
+           if num2[-1] == "!":
+               num2 = factorial(num2)
+           result=evaluate_binary_operation(float(num1),float(num2),element)
            stack.push(result)
        else:
            stack.push(element)
@@ -157,6 +165,10 @@ def interpret_simple_arithmetic_expression(expression):
                num1 = num1 + processed_expression.string[k]
                k = k - 1
            num1 = num1[::-1]
+           if num1[-1] == "!":
+               num1 = factorial(num1)
+           if num2[-1] == "!":
+               num2 = factorial(num2)
            result = str(evaluate_binary_operation(float(num1),float(num2),Operator))
            evaluated_expression = processed_expression.string[:k + 1] + result + processed_expression.string[j:]
            processed_expression = ArithmeticExpression(evaluated_expression)
@@ -184,7 +196,7 @@ def interpret_arithmetic_expression(expression):
 def main():
     while True:
         try:
-            print("Enter the expression:")
+            print("Enter the arithmetic expression you want to simplify:")
             expression = input()
             if expression == "-end":
                 break
@@ -193,13 +205,13 @@ def main():
             print(f"Result as calculated by interpret_arithmetic_expression(): {interpret_arithmetic_expression(expression)}")
             print(f"Result as calculated by shunting_yard_algorithm(): {shunting_yard_algorithm(expression)}")
             print(f"Result as calculated by evaluate_arithmetic_expression(): {evaluate_arithmetic_expression(expression)}")
-        except ZeroDivisionError:
-            print("Cannot divide by zero")
-        except SyntaxError:
-            print("Cannot do complex number algebra")
-        except ValueError:
-            print("Invalid syntax for arithmetic expression")
-        except IndexError:
-            print("Invalid syntax for arithmetic expression")
-if __name__ =="__main__":
+        except ZeroDivisionError as e:
+            print(e)
+        except SyntaxError as e:
+            print(e)
+        except ValueError as e:
+            print(e)
+        except IndexError as e:
+            print(e)
+if __name__ == "__main__":
     main()
